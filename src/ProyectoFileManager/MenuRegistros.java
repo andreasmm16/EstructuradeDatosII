@@ -43,6 +43,7 @@ public class MenuRegistros extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(408, 308));
         setPreferredSize(new java.awt.Dimension(408, 308));
@@ -184,6 +185,11 @@ public class MenuRegistros extends javax.swing.JPanel {
         });
         add(jButton10);
         jButton10.setBounds(240, 40, 140, 30);
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ProyectoFileManager/Fondo.png"))); // NOI18N
+        add(jLabel2);
+        jLabel2.setBounds(-6, -6, 420, 320);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -317,6 +323,7 @@ public class MenuRegistros extends javax.swing.JPanel {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }

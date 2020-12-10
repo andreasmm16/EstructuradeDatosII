@@ -172,6 +172,7 @@ public class IntroducirRegistros extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
 
         setLayout(null);
 
@@ -220,6 +221,11 @@ public class IntroducirRegistros extends javax.swing.JPanel {
 
         add(jScrollPane1);
         jScrollPane1.setBounds(20, 110, 360, 60);
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ProyectoFileManager/Fondo.png"))); // NOI18N
+        add(jLabel2);
+        jLabel2.setBounds(0, 0, 410, 310);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
@@ -319,6 +325,7 @@ public class IntroducirRegistros extends javax.swing.JPanel {
     private javax.swing.JButton ingresarButton;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

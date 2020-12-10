@@ -38,6 +38,7 @@ public class BorrarRegistro extends javax.swing.JPanel {
         textfield = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         Campo = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setLayout(null);
 
@@ -47,6 +48,7 @@ public class BorrarRegistro extends javax.swing.JPanel {
         add(jLabel1);
         jLabel1.setBounds(90, 20, 240, 40);
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton1.setText("BORRAR");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -59,26 +61,35 @@ public class BorrarRegistro extends javax.swing.JPanel {
             }
         });
         add(jButton1);
-        jButton1.setBounds(100, 210, 100, 23);
+        jButton1.setBounds(190, 170, 100, 30);
 
-        jButton2.setText("ATRAS");
+        jButton2.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ProyectoFileManager/sign-out.png"))); // NOI18N
+        jButton2.setText("SALIR");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
             }
         });
         add(jButton2);
-        jButton2.setBounds(200, 210, 100, 23);
+        jButton2.setBounds(280, 250, 110, 40);
         add(textfield);
-        textfield.setBounds(150, 140, 120, 20);
+        textfield.setBounds(150, 140, 180, 20);
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("INGRESE TEXTO");
         add(jLabel3);
-        jLabel3.setBounds(50, 140, 110, 30);
+        jLabel3.setBounds(40, 140, 110, 20);
 
         Campo.setText("Campo Clave : ");
         add(Campo);
-        Campo.setBounds(110, 90, 230, 14);
+        Campo.setBounds(100, 90, 230, 14);
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ProyectoFileManager/Fondo.png"))); // NOI18N
+        add(jLabel2);
+        jLabel2.setBounds(0, 0, 410, 310);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
@@ -115,6 +126,7 @@ public class BorrarRegistro extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField textfield;
     // End of variables declaration//GEN-END:variables

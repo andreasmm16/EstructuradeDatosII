@@ -50,6 +50,7 @@ public class BuscarRegistro extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         Campo = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
 
         setLayout(null);
 
@@ -59,6 +60,7 @@ public class BuscarRegistro extends javax.swing.JPanel {
         add(jLabel1);
         jLabel1.setBounds(90, 20, 230, 50);
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton1.setText("BUSCAR");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -71,30 +73,40 @@ public class BuscarRegistro extends javax.swing.JPanel {
             }
         });
         add(jButton1);
-        jButton1.setBounds(120, 210, 100, 32);
+        jButton1.setBounds(190, 180, 100, 23);
 
-        jButton2.setText("ATRAS");
+        jButton2.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ProyectoFileManager/sign-out.png"))); // NOI18N
+        jButton2.setText("SALIR");
+        jButton2.setToolTipText("");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
             }
         });
         add(jButton2);
-        jButton2.setBounds(230, 210, 100, 32);
+        jButton2.setBounds(270, 250, 120, 40);
         add(textfield);
-        textfield.setBounds(170, 150, 140, 24);
+        textfield.setBounds(170, 150, 140, 20);
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("INGRESE TEXTO");
         add(jLabel2);
         jLabel2.setBounds(40, 150, 110, 30);
 
+        Campo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         Campo.setText("BUSCAR POR CAMPO");
         add(Campo);
-        Campo.setBounds(30, 100, 230, 16);
+        Campo.setBounds(30, 100, 230, 14);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         add(jComboBox1);
-        jComboBox1.setBounds(170, 100, 150, 26);
+        jComboBox1.setBounds(170, 100, 150, 20);
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ProyectoFileManager/Fondo.png"))); // NOI18N
+        add(jLabel3);
+        jLabel3.setBounds(0, 0, 410, 310);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -167,6 +179,7 @@ public class BuscarRegistro extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField textfield;
     // End of variables declaration//GEN-END:variables
 }

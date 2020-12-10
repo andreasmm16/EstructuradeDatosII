@@ -42,14 +42,17 @@ public class CrearIndices extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         jButton2.setText("jButton2");
 
         setLayout(null);
 
+        jLabel1.setFont(new java.awt.Font("Tw Cen MT", 1, 30)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("CREAR INDICES");
         add(jLabel1);
-        jLabel1.setBounds(140, 60, 140, 14);
+        jLabel1.setBounds(90, 20, 220, 40);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         add(jComboBox1);
@@ -77,7 +80,12 @@ public class CrearIndices extends javax.swing.JPanel {
             }
         });
         add(jButton3);
-        jButton3.setBounds(280, 230, 110, 40);
+        jButton3.setBounds(280, 250, 110, 40);
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ProyectoFileManager/Fondo.png"))); // NOI18N
+        add(jLabel3);
+        jLabel3.setBounds(-6, -6, 420, 320);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
@@ -116,5 +124,6 @@ public class CrearIndices extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }
