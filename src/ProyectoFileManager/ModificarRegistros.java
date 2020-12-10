@@ -144,7 +144,7 @@ public class ModificarRegistros extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(20, 60, 370, 200);
+        jScrollPane1.setBounds(20, 60, 370, 190);
 
         jButton1.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ProyectoFileManager/sign-out.png"))); // NOI18N
@@ -162,6 +162,7 @@ public class ModificarRegistros extends javax.swing.JPanel {
         add(jButton1);
         jButton1.setBounds(280, 260, 110, 40);
 
+        jButton4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton4.setText("MODIFICAR");
         jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -169,7 +170,7 @@ public class ModificarRegistros extends javax.swing.JPanel {
             }
         });
         add(jButton4);
-        jButton4.setBounds(50, 260, 120, 23);
+        jButton4.setBounds(20, 260, 120, 30);
 
         jButton2.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ProyectoFileManager/sign-out.png"))); // NOI18N

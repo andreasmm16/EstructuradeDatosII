@@ -56,8 +56,9 @@ public class CrearIndices extends javax.swing.JPanel {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         add(jComboBox1);
-        jComboBox1.setBounds(160, 120, 140, 20);
+        jComboBox1.setBounds(200, 120, 140, 20);
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton1.setText("CREAR INDICE");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -67,9 +68,10 @@ public class CrearIndices extends javax.swing.JPanel {
         add(jButton1);
         jButton1.setBounds(140, 180, 160, 23);
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("CAMPOS DISPONIBLES");
         add(jLabel2);
-        jLabel2.setBounds(20, 120, 110, 14);
+        jLabel2.setBounds(20, 120, 170, 20);
 
         jButton3.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ProyectoFileManager/sign-out.png"))); // NOI18N

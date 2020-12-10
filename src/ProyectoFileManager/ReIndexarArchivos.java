@@ -65,8 +65,9 @@ public class ReIndexarArchivos extends javax.swing.JPanel {
             }
         });
         add(jButton4);
-        jButton4.setBounds(275, 210, 110, 33);
+        jButton4.setBounds(280, 243, 110, 40);
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton2.setText("RE INDEXAR");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -78,11 +79,12 @@ public class ReIndexarArchivos extends javax.swing.JPanel {
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         add(jComboBox2);
-        jComboBox2.setBounds(134, 115, 140, 20);
+        jComboBox2.setBounds(190, 110, 140, 30);
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("CAMPOS DISPONIBLES");
         add(jLabel5);
-        jLabel5.setBounds(15, 115, 110, 14);
+        jLabel5.setBounds(15, 115, 170, 14);
 
         jLabel4.setFont(new java.awt.Font("Tw Cen MT", 1, 30)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
