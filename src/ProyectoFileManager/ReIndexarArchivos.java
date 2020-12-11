@@ -104,30 +104,23 @@ public class ReIndexarArchivos extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        try {                                      
-            int size = jComboBox2.getItemCount();
-            
-            if (size == 0) {
-                JOptionPane.showMessageDialog(null, "¡Campo seleccionado Invalido!", "Archivos", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            Files.deleteIfExists(Paths.get(Main.fileName + "\\" + Main.name + jComboBox2.getSelectedItem() + "Index.txt"));
-            
-            String x = String.valueOf(jComboBox2.getSelectedItem());
-            
-            try {
-                Main.indexFile = new RandomAccessFile(Main.fileName + "\\" + Main.name + x + "Index.txt", "rw");
-                Main.index.CrearIndex(x);
-                JOptionPane.showMessageDialog(null, "¡Indice Actualizado correctamente!", "Archivos", JOptionPane.INFORMATION_MESSAGE);
-                MenuRegistros mr = new MenuRegistros();
-                Main.frame.Panel(mr);
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(CrearIndices.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(CrearIndices.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        int size = jComboBox2.getItemCount();
+        if (size == 0) {
+            JOptionPane.showMessageDialog(null, "¡Campo seleccionado Invalido!", "Archivos", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String x = String.valueOf(jComboBox2.getSelectedItem());
+        try {
+            Main.indexFile = new RandomAccessFile(Main.fileName + "\\" + Main.name + x + "Index.txt", "rw");
+            Main.indexFile.setLength(0);
+            Main.index.CrearIndex(x);
+            JOptionPane.showMessageDialog(null, "¡Indice Actualizado correctamente!", "Archivos", JOptionPane.INFORMATION_MESSAGE);
+            MenuRegistros mr = new MenuRegistros();
+            Main.frame.Panel(mr);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(CrearIndices.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(ReIndexarArchivos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CrearIndices.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton2MouseClicked
 

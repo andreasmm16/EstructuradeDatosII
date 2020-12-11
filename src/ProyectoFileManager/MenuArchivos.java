@@ -210,7 +210,7 @@ public class MenuArchivos extends javax.swing.JPanel {
         if (Main.open) {
             JOptionPane.showMessageDialog(null, "¡Ya existe un archivo abierto!", "Archivos", JOptionPane.ERROR_MESSAGE);
         } else {
-            Main.fileName ="c:\\" +  JOptionPane.showInputDialog("Ingrese ruta de archivo: ");
+            Main.fileName ="c:\\"+JOptionPane.showInputDialog("Ingrese ruta de archivo: ");
             Main.carpeta = new File(Main.fileName);
             if (Main.carpeta.isDirectory()) {
                 Main.name = JOptionPane.showInputDialog("Ingrese nombre del archivo: ");

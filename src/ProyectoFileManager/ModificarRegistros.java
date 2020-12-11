@@ -6,14 +6,17 @@ import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultCellEditor;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
 
 public class ModificarRegistros extends javax.swing.JPanel {
 
@@ -24,6 +27,7 @@ public class ModificarRegistros extends javax.swing.JPanel {
     ArrayList<String> fields = new ArrayList<String>();
     ArrayList<Campo> campos_archivo = new ArrayList<Campo>();
     ArrayList<String> modificacion_previa = new ArrayList<String>();
+    int Llave = 0;
 
     public ModificarRegistros() throws IOException {
         initComponents();
@@ -51,6 +55,9 @@ public class ModificarRegistros extends javax.swing.JPanel {
             n.setSize(size);
             n.setTipo(type_field);
             n.setLlave(isKey);
+            if (isKey) {
+                Llave = campos;
+            }
             campos_archivo.add(n);
             Main.file.readChar();
             campos++;
@@ -62,7 +69,8 @@ public class ModificarRegistros extends javax.swing.JPanel {
             for (int i = 0; i < campos; i++) {
 
                 if (fields.get(i).equals("char")) {
-                    row[i] = Main.file.readUTF();
+                    String value = Main.file.readUTF();
+                    row[i] = trim(value);
                 } else {
                     row[i] = (Integer) Main.file.readInt();
                 }
@@ -75,14 +83,16 @@ public class ModificarRegistros extends javax.swing.JPanel {
         campos_archivo.forEach((campo) -> {
             if (campo.llave) {
                 try {
-                    Main.indexFile = new RandomAccessFile(Main.fileName + "\\" +  Main.name +campo.getNombre()+ "Index.txt", "rw");
+                    Main.indexFile = new RandomAccessFile(Main.fileName + "\\" + Main.name + campo.getNombre() + "Index.txt", "rw");
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(ModificarRegistros.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
             }
         });
-
+        JTextField f = new JTextField();
+        f.setEditable(false);
+        jTable1.getColumnModel().getColumn(Llave).setCellEditor(new DefaultCellEditor(f));
     }
 
     public void limpiarTabla(JTable tabla) {
@@ -193,7 +203,17 @@ public class ModificarRegistros extends javax.swing.JPanel {
         add(jLabel3);
         jLabel3.setBounds(0, 0, 410, 310);
     }// </editor-fold>//GEN-END:initComponents
+      public static String trim(String str) {
+        int len = str.length();
+        int st = 0;
 
+        char[] val = str.toCharArray();
+
+        while ((st < len) && (val[len - 1] <= ' ')) {
+            len--;
+        }
+        return str.substring(st, len);
+    }
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         MenuRegistros mr = new MenuRegistros();
         Main.frame.Panel(mr);
@@ -213,7 +233,7 @@ public class ModificarRegistros extends javax.swing.JPanel {
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
         try {
-            Main.index.getIndex();
+            Main.index.cargarIndices();
             campos_archivo.forEach((campo) -> {
                 if (campo.llave) {
                     posicionRegistro = Main.index.getPunteroRegistro(campo.valor);
@@ -237,13 +257,13 @@ public class ModificarRegistros extends javax.swing.JPanel {
                     }
                     reempl = String.valueOf(valor);
                     Main.file.writeUTF(reempl);
-                    if (campos_archivo.get(i).llave) {
-                        Main.index.ModificarRegistro(campos_archivo.get(i).valor,campos_archivo.get(i).getNombre(), reempl);
-                    }
+//                    if (campos_archivo.get(i).llave) {
+//                            Main.index.ModificarRegistro(campos_archivo.get(i).valor,campos_archivo.get(i).getNombre(), reempl);
+//                    }
                 } else {
-                    if (campos_archivo.get(i).llave) {
-                        Main.index.ModificarRegistro(campos_archivo.get(i).valor,campos_archivo.get(i).getNombre(), value);
-                    }
+//                    if (campos_archivo.get(i).llave) {
+//                        Main.index.ModificarRegistro(campos_archivo.get(i).valor,campos_archivo.get(i).getNombre(), value);
+//                    }
 
                     Main.file.writeInt(Integer.parseInt(value));
                 }

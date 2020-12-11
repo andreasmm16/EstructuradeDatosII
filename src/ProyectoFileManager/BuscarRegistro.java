@@ -125,7 +125,8 @@ public class BuscarRegistro extends javax.swing.JPanel {
                 return;
             }
             Main.indexFile = new RandomAccessFile(Main.fileName + "\\" + Main.name + x + "Index.txt", "rw");
-            Main.index.getIndex();
+            Main.index.cargarIndices();
+            //Main.index.getIndex();
             int size = 0;
             Main.campos.forEach((campo) -> {
                 if (campo.getNombre().equals(x) && !campo.getTipo().equals("int")) {

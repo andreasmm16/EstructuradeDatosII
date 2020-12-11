@@ -29,7 +29,7 @@ public class Main {
     public static int head;
     public static LinkedList lista;
     public static long structure;
-    public static ArbolB arbol;
+    public static BTree arbol;
     public static EstructuraIndex index ;
     
     public static void main(String[] args) {
@@ -42,7 +42,7 @@ public class Main {
         frame.setVisible(true);
         frame.setResizable(false);
         MenuPrincipal mp = new MenuPrincipal();
-        arbol = new ArbolB(3);
+        arbol = new BTree();
         index = new EstructuraIndex();
         frame.Panel(mp);
     }

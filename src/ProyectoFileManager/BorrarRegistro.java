@@ -24,7 +24,7 @@ public class BorrarRegistro extends javax.swing.JPanel {
         });
         Campo.setText("CAMPO CLAVE: " + nombre_campo + " Tamano: " + size + " Tipo: " + tipo);
         Main.indexFile = new RandomAccessFile(Main.fileName + "\\" + Main.name + nombre_campo + "Index.txt", "rw");
-        Main.index.getIndex(); //Carga a memoria todos los registros de campo llave al Arbol
+        Main.index.cargarIndices();//Carga a memoria todos los registros de campo llave al Arbol
 
     }
 
@@ -96,9 +96,6 @@ public class BorrarRegistro extends javax.swing.JPanel {
         try {
            
             if (Main.index.borrarRegistro(textfield.getText(), nombre_campo)) {
-                
-                Main.index.getIndex();
-
                 JOptionPane.showMessageDialog(null, "¡Registro Borrado Exitosamente!", "Archivos", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "¡Registro No Encontrado!", "Archivos", JOptionPane.ERROR_MESSAGE);
