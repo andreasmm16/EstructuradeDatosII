@@ -84,7 +84,7 @@ public class BorrarRegistro extends javax.swing.JPanel {
 
         Campo.setText("Campo Clave : ");
         add(Campo);
-        Campo.setBounds(100, 90, 230, 14);
+        Campo.setBounds(60, 90, 290, 20);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ProyectoFileManager/Fondo.png"))); // NOI18N

@@ -98,6 +98,11 @@ public class MenuPrincipal extends javax.swing.JPanel {
 
         jButton5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton5.setText("Utilidades");
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
         add(jButton5);
         jButton5.setBounds(120, 200, 170, 30);
 
@@ -132,6 +137,11 @@ public class MenuPrincipal extends javax.swing.JPanel {
     private void archivoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_archivoButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_archivoButtonActionPerformed
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        MenuUtilidades mu = new MenuUtilidades();
+        Main.frame.Panel(mu);
+    }//GEN-LAST:event_jButton5MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
