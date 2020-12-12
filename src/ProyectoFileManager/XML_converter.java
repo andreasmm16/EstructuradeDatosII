@@ -95,7 +95,7 @@ public class XML_converter {
         fw.close();
     }
 
-  //  public static void main(String args[]) throws IOException {
-    //    convert("otrofile.txt");
+   // public static void main(String args[]) throws IOException {
+     //   convert("otrofile.txt");
     //}
 }
