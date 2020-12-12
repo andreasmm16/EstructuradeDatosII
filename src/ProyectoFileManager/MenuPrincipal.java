@@ -130,8 +130,13 @@ public class MenuPrincipal extends javax.swing.JPanel {
     }//GEN-LAST:event_camposButtonMouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-        MenuRegistros mr = new MenuRegistros();
-        Main.frame.Panel(mr);
+        if(Main.open){
+         MenuRegistros mr = new MenuRegistros();
+        Main.frame.Panel(mr);   
+        }else{
+            JOptionPane.showMessageDialog(null, "¡No existe archivo abierto!", "Archivos", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void archivoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_archivoButtonActionPerformed

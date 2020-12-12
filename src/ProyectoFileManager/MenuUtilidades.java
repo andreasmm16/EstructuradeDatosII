@@ -33,6 +33,7 @@ public class MenuUtilidades extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         jButton3.setText("jButton3");
 
@@ -68,12 +69,17 @@ public class MenuUtilidades extends javax.swing.JPanel {
             }
         });
         add(jButton4);
-        jButton4.setBounds(290, 240, 100, 50);
+        jButton4.setBounds(290, 260, 110, 40);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ProyectoFileManager/excel.png"))); // NOI18N
         add(jLabel2);
         jLabel2.setBounds(50, 110, 100, 80);
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ProyectoFileManager/Fondo.png"))); // NOI18N
+        add(jLabel3);
+        jLabel3.setBounds(0, -10, 410, 330);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
@@ -94,5 +100,6 @@ public class MenuUtilidades extends javax.swing.JPanel {
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }
