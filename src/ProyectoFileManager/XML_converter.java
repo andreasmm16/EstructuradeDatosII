@@ -29,7 +29,7 @@ public class XML_converter {
     static private int head;
     static private long tamano_metadata;
 
-    final static private ArrayList<Campo> campos = new ArrayList<Campo>();
+    static private ArrayList<Campo> campos;
     
     public static void convert(String input_file_path) throws IOException{
         convert(input_file_path, input_file_path.replace(".txt", ".xml"));
@@ -40,6 +40,7 @@ public class XML_converter {
     }
 
     public static void convert(String input_file_path, String output_file_path) throws IOException {
+        campos = new ArrayList<Campo>();
         RandomAccessFile rafObj = new RandomAccessFile(input_file_path, "r");
         rafObj.seek(0);
         File file = new File(output_file_path);
