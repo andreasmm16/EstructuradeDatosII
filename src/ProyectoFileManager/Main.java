@@ -8,6 +8,7 @@ package ProyectoFileManager;
 import java.io.File;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 
 /**
  *
@@ -15,6 +16,7 @@ import java.util.ArrayList;
  */
 public class Main {
     public static Frame frame;
+    public static JFrame frame2;
     public static RandomAccessFile file;
     public static boolean open;
     public static String name; //guardo nombre de archivo
@@ -31,10 +33,11 @@ public class Main {
     public static long structure;
     public static BTree arbol;
     public static EstructuraIndex index ;
-   
     
     public static void main(String[] args) {
         frame = new Frame();
+        frame2 = new Cruce();
+        frame2.setVisible(false);
         open = false;
         campos = new ArrayList();
         tipoCam = 0;
