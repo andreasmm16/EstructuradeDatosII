@@ -195,7 +195,7 @@ public class MenuArchivos extends javax.swing.JPanel {
             Main.open = false;
             Main.campos.clear();
             Main.key="";
-            Main.name="";
+        
             try {
                 Main.file.close();
         //        Main.indexFile.close(); //cuando cierro el archivo data tambien cierro el indexFile
