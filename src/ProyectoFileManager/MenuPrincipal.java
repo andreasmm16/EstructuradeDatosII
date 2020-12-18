@@ -113,10 +113,8 @@ public class MenuPrincipal extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void archivoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_archivoButtonMouseClicked
-       MenuArchivos ma = new MenuArchivos();
-        Main.frame.Panel(ma);
-        
-       
+        MenuArchivos ma = new MenuArchivos();
+        Main.frame.Panel(ma);      
 
     }//GEN-LAST:event_archivoButtonMouseClicked
 

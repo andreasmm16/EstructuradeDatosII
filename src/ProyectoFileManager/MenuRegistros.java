@@ -163,6 +163,11 @@ public class MenuRegistros extends javax.swing.JPanel {
 
         jButton9.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
         jButton9.setText("Cruzar Archivos");
+        jButton9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton9MouseClicked(evt);
+            }
+        });
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
@@ -293,7 +298,7 @@ public class MenuRegistros extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton6MouseClicked
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -301,15 +306,20 @@ public class MenuRegistros extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MouseClicked
-       CrearIndices ci = new CrearIndices();
-       Main.frame.Panel(ci);
+        CrearIndices ci = new CrearIndices();
+        Main.frame.Panel(ci);
     }//GEN-LAST:event_jButton10MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         ReIndexarArchivos rd = new ReIndexarArchivos();
-       Main.frame.Panel(rd);
-        
+        Main.frame.Panel(rd);
+
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
+        Cruzar_panel p = new Cruzar_panel();
+        Main.frame.Panel(p);
+    }//GEN-LAST:event_jButton9MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

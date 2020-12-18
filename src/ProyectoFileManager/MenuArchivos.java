@@ -14,7 +14,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import java.io.RandomAccessFile;
-
 /**
  *
  * @author andre
@@ -26,6 +25,9 @@ public class MenuArchivos extends javax.swing.JPanel {
      */
     public MenuArchivos() {
         initComponents();
+        jLabel3.setVisible(false);
+        comboBox.setVisible(false);
+        selectButton.setVisible(false);
     }
 
     /**
@@ -40,9 +42,12 @@ public class MenuArchivos extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         salirButton = new javax.swing.JButton();
         nuevoButton = new javax.swing.JButton();
-        salvarButton = new javax.swing.JButton();
         cerrarButton = new javax.swing.JButton();
         abrirButton = new javax.swing.JButton();
+        salvarButton = new javax.swing.JButton();
+        comboBox = new javax.swing.JComboBox<>();
+        selectButton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setLayout(null);
@@ -75,16 +80,6 @@ public class MenuArchivos extends javax.swing.JPanel {
         add(nuevoButton);
         nuevoButton.setBounds(140, 80, 140, 30);
 
-        salvarButton.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        salvarButton.setText("Salvar");
-        salvarButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                salvarButtonMouseClicked(evt);
-            }
-        });
-        add(salvarButton);
-        salvarButton.setBounds(140, 160, 140, 30);
-
         cerrarButton.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         cerrarButton.setText("Cerrar");
         cerrarButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -105,15 +100,46 @@ public class MenuArchivos extends javax.swing.JPanel {
         add(abrirButton);
         abrirButton.setBounds(140, 120, 140, 30);
 
+        salvarButton.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        salvarButton.setText("Salvar");
+        salvarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                salvarButtonMouseClicked(evt);
+            }
+        });
+        add(salvarButton);
+        salvarButton.setBounds(140, 160, 140, 30);
+
+        comboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        add(comboBox);
+        comboBox.setBounds(110, 120, 200, 30);
+
+        selectButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        selectButton.setText("Select");
+        selectButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                selectButtonMouseClicked(evt);
+            }
+        });
+        add(selectButton);
+        selectButton.setBounds(160, 160, 100, 30);
+
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Archivos en Carpeta disponibles");
+        add(jLabel3);
+        jLabel3.setBounds(100, 100, 230, 20);
+
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ProyectoFileManager/Fondo.png"))); // NOI18N
         add(jLabel2);
-        jLabel2.setBounds(0, 0, 410, 310);
+        jLabel2.setBounds(-6, -6, 420, 320);
     }// </editor-fold>//GEN-END:initComponents
 
     private void salirButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirButtonMouseClicked
         MenuPrincipal mp = new MenuPrincipal();
         Main.frame.Panel(mp);
+
     }//GEN-LAST:event_salirButtonMouseClicked
     //JOptionPane.showMessageDialog(null, "LLENE LOS CUADROS DE TEXTO!!!", "ERROR", JOptionPane.ERROR_MESSAGE);
 
@@ -194,10 +220,10 @@ public class MenuArchivos extends javax.swing.JPanel {
         } else {
             Main.open = false;
             Main.campos.clear();
-            Main.key ="";
+            Main.key = "";
             try {
                 Main.file.close();
-                Main.indexFile.close(); //cuando cierro el archivo data tambien cierro el indexFile
+                //    Main.indexFile.close(); //cuando cierro el archivo data tambien cierro el indexFile
                 JOptionPane.showMessageDialog(null, "¡Archivo cerrado exitosamente!", "Archivos", JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException ex) {
                 Logger.getLogger(MenuArchivos.class.getName()).log(Level.SEVERE, null, ex);
@@ -211,11 +237,56 @@ public class MenuArchivos extends javax.swing.JPanel {
         if (Main.open) {
             JOptionPane.showMessageDialog(null, "¡Ya existe un archivo abierto!", "Archivos", JOptionPane.ERROR_MESSAGE);
         } else {
-            Main.fileName = "c:\\" + "\\Users\\Mauricio\\Documents";//+JOptionPane.showInputDialog("Ingrese ruta de archivo: ");
+            Main.fileName = "c:\\" + JOptionPane.showInputDialog("Ingrese ruta de archivo: ");
             Main.carpeta = new File(Main.fileName);
             if (Main.carpeta.isDirectory()) {
-                Main.name = "Person";//JOptionPane.showInputDialog("Ingrese nombre del archivo: ");
+                jLabel3.setVisible(true);
+                comboBox.setVisible(true);
+                selectButton.setVisible(true);
+                System.out.println("si entre");
+                nuevoButton.setVisible(false);
+                abrirButton.setVisible(false);
+                salvarButton.setVisible(false);
+                cerrarButton.setVisible(false);
+
+                for (int x = 0; x < Main.carpeta.list().length; x++) {
+                    comboBox.addItem(Main.carpeta.list()[x]);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "¡Carpeta no existe!", "Archivos", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+
+    }//GEN-LAST:event_abrirButtonMouseClicked
+
+    static String stripExtension (String str) {
+        // Handle null case specially.
+
+        if (str == null) return null;
+
+        // Get position of last '.'.
+
+        int pos = str.lastIndexOf(".");
+
+        // If there wasn't any '.' just return the string as is.
+
+        if (pos == -1) return str;
+
+        // Otherwise return the string, up to the dot.
+
+        return str.substring(0, pos);
+    }
+    
+    private void selectButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectButtonMouseClicked
+
+        
+                //  Main.name = JOptionPane.showInputDialog("Ingrese nombre del archivo: ");
+                String test = comboBox.getSelectedItem().toString();
+                Main.name = stripExtension(test);
+                System.out.println(Main.name);
                 File tmp = new File(Main.fileName + "\\" + Main.name + ".txt");
+                System.out.println(Main.fileName + "\\" + Main.name);
                 if (!tmp.exists()) {
                     Main.name = "";
                     Main.fileName = "";
@@ -304,23 +375,30 @@ public class MenuArchivos extends javax.swing.JPanel {
                         Logger.getLogger(MenuArchivos.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     JOptionPane.showMessageDialog(null, "¡Archivo abierto exitosamente!", "Archivos", JOptionPane.INFORMATION_MESSAGE);
+                    //aqui vuelvo again visible los elementos
+
+                    nuevoButton.setVisible(true);
+                    abrirButton.setVisible(true);
+                    salvarButton.setVisible(true);
+                    cerrarButton.setVisible(true);
+                    jLabel3.setVisible(false);
+                    comboBox.setVisible(false);
+                    selectButton.setVisible(false);
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "¡Carpeta no existe!", "Archivos", JOptionPane.ERROR_MESSAGE);
-            }
-        }
 
-
-    }//GEN-LAST:event_abrirButtonMouseClicked
+    }//GEN-LAST:event_selectButtonMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton abrirButton;
     private javax.swing.JButton cerrarButton;
+    private javax.swing.JComboBox<String> comboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JButton nuevoButton;
     private javax.swing.JButton salirButton;
     private javax.swing.JButton salvarButton;
+    private javax.swing.JButton selectButton;
     // End of variables declaration//GEN-END:variables
 }

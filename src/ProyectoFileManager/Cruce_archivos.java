@@ -244,13 +244,13 @@ public class Cruce_archivos {
     }
        
     public static void main(String args[]) throws IOException{
-        leerArchivos(new String[]{"pacientes.txt", "empleados.txt"});
+        leerArchivos(new String[]{"ciudadanos.txt", "empleados.txt"});
         for(ArrayList<Campo> c : campos){
             for(Campo campo : c)
                 System.out.println(campo.nombre);
             System.out.println();
         }
         System.out.println(); 
-        cruzar(new String[]{"Nombre"}, "cruce2.txt");
+        cruzar(new String[]{"Ciudad", "Nombre"}, "cruce2.txt");
     }
 }

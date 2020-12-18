@@ -31,6 +31,7 @@ public class Main {
     public static long structure;
     public static BTree arbol;
     public static EstructuraIndex index ;
+   
     
     public static void main(String[] args) {
         frame = new Frame();
