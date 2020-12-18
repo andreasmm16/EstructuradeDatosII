@@ -144,7 +144,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
     }//GEN-LAST:event_archivoButtonActionPerformed
 
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
-        MenuUtilidades mu = new MenuUtilidades();
+        convertidor_panel mu = new convertidor_panel();
         Main.frame.Panel(mu);
     }//GEN-LAST:event_jButton5MouseClicked
 

@@ -5,7 +5,10 @@ package ProyectoFileManager;
  * and open the template in the editor.
  */
 
-
+/**
+ *
+ * @author diego
+ */
 import java.io.RandomAccessFile;
 import java.io.IOException;
 import java.io.File;
@@ -14,6 +17,10 @@ import java.util.ArrayList;
 
 enum TIPO {
     INT, CHAR
+}
+
+enum FILE_TYPE{
+    XML, CSV
 }
 
 public class XML_converter {
@@ -31,16 +38,8 @@ public class XML_converter {
     static private long tamano_metadata;
 
     static private ArrayList<Campo> campos;
-    
-    public static void convert(String input_file_path) throws IOException{
-        convert(input_file_path, input_file_path.replace(".txt", ".xml"));
-    }
-    
-    public static void convert(File input_file) throws IOException{
-        convert(input_file.getPath(), input_file.getPath().replace(".txt", ".xml"));
-    }
 
-    public static void convert(String input_file_path, String output_file_path) throws IOException {
+    public static void convert(String input_file_path, String output_file_path, FILE_TYPE file_type) throws IOException {
         campos = new ArrayList<Campo>();
         RandomAccessFile rafObj = new RandomAccessFile(input_file_path, "r");
         rafObj.seek(0);
@@ -75,27 +74,51 @@ public class XML_converter {
         }
         
         FileWriter fw = new FileWriter(file);       
-        fw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-        for (int i = 0; i < cantidad_de_registros; i++) {
-            fw.append("<Registro>\n");
-            for (Campo campo : campos) {
-                fw.append("\t<" + campo.nombre + '>');
-                switch (campo.tipo) {
-                    case CHAR:
-                        fw.append(rafObj.readUTF());
-                        break;
-                    case INT:
-                        fw.append(rafObj.readInt() + "");
-                        break;
+        if(file_type == FILE_TYPE.XML){
+            fw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+            for (int i = 0; i < cantidad_de_registros; i++) {
+                fw.append("<Registro>\n");
+                for (Campo campo : campos) {
+                    fw.append("\t<" + campo.nombre + '>');
+                    switch (campo.tipo) {
+                        case CHAR:
+                            fw.append(rafObj.readUTF());
+                            break;
+                        case INT:
+                            fw.append(rafObj.readInt() + "");
+                            break;
+                    }
+                    fw.append("</" +  campo.nombre + ">\n"); 
                 }
-                fw.append("</" +  campo.nombre + ">\n"); 
+                fw.append("</Registro>\n");
             }
-            fw.append("</Registro>\n");
+        }else if(file_type == FILE_TYPE.CSV){
+            for(Campo campo : campos){
+                fw.append(campo.nombre);
+                if(campo != campos.get(campos.size() - 1))
+                    fw.append(',');    
+            }
+            fw.append('\n');
+            for(int i = 0; i < cantidad_de_registros; i++){
+                for(Campo campo : campos){
+                    switch (campo.tipo) {
+                        case CHAR:
+                            fw.append(rafObj.readUTF());
+                            break;
+                        case INT:
+                            fw.append(rafObj.readInt() + "");
+                            break;
+                    }
+                    if(campo != campos.get(campos.size() - 1))
+                        fw.append(',');                   
+                }
+                fw.append('\n');
+            }
         }
         fw.close();
     }
 
-   // public static void main(String args[]) throws IOException {
-     //   convert("otrofile.txt");
-    //}
+    public static void main(String args[]) throws IOException {
+        convert("otrofile.txt", "otrofile.csv", FILE_TYPE.CSV);
+    }
 }
