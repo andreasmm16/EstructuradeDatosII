@@ -22,6 +22,7 @@ public class IntroducirRegistros extends javax.swing.JPanel {
     int campoSize;
     boolean isKey;
     int posValue = 0;
+
     public IntroducirRegistros() throws IOException {
         initComponents();
         limpiarTabla(jTable1);
@@ -107,7 +108,7 @@ public class IntroducirRegistros extends javax.swing.JPanel {
             model.addColumn(String.valueOf(Main.file.readInt()));
             Main.file.readChar();
             boolean isKeyy = Main.file.readBoolean();
-             if (!isKeyy && cerrar) {
+            if (!isKeyy && cerrar) {
                 posValue += 2;
             } else {
                 cerrar = false;
@@ -257,7 +258,7 @@ public class IntroducirRegistros extends javax.swing.JPanel {
             x = 0;
             cont = 0;
 
-            if (ver) {              
+            if (ver) {
                 Main.file.seek(0);
                 Main.cantRegis++;
                 Main.file.writeInt(Main.cantRegis);
@@ -285,7 +286,7 @@ public class IntroducirRegistros extends javax.swing.JPanel {
                                 Main.indexFile = new RandomAccessFile(Main.fileName + "\\" + Main.name + reempl + "Index.txt", "rw");
                                 index.insertIndex();
                             }
-                            
+
                             Main.file.writeUTF(reempl);
                         } else {
                             if (campoClave.equals(nombre_Campos.get(cont)) && fields.get(cont).equals(tipoCampo) && campoSize == sizes.get(cont) && isKey) {//Evaluar si el campo es llave si lo es ingresar al index file
@@ -313,8 +314,7 @@ public class IntroducirRegistros extends javax.swing.JPanel {
         } catch (IOException ex) {
             Logger.getLogger(IntroducirRegistros.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-System.out.println(Main.cantRegis);
+        System.out.println(Main.cantRegis);
     }//GEN-LAST:event_ingresarButtonMouseClicked
 
     private void ingresarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarButtonActionPerformed
