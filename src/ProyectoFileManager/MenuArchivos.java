@@ -194,9 +194,10 @@ public class MenuArchivos extends javax.swing.JPanel {
         } else {
             Main.open = false;
             Main.campos.clear();
+            Main.key="";
             try {
                 Main.file.close();
-                Main.indexFile.close(); //cuando cierro el archivo data tambien cierro el indexFile
+        //        Main.indexFile.close(); //cuando cierro el archivo data tambien cierro el indexFile
                 JOptionPane.showMessageDialog(null, "¡Archivo cerrado exitosamente!", "Archivos", JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException ex) {
                 Logger.getLogger(MenuArchivos.class.getName()).log(Level.SEVERE, null, ex);

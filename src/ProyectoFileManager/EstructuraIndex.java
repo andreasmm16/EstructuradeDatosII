@@ -102,26 +102,22 @@ public class EstructuraIndex {
             Main.arbol.delete(value);
             Main.indexFile = new RandomAccessFile(Main.fileName + "\\" + Main.name + name + "Index.txt", "rw");
             Main.indexFile.setLength(0);
-            System.out.println(Main.arbol.ReWriteIndexFile()); 
+            System.out.println(Main.arbol.ReWriteIndexFile());
+            Main.file.seek(registro.puntero_registro);
+            if (Main.campos.get(0).tipo.equals("char")) {
+                char[] registroBorrado = new char[Main.campos.get(0).size];
+                registroBorrado[0] = '*';
+                for (int i = 1; i < registroBorrado.length - 1; i++) {
+                    registroBorrado[i] = ' ';
+                }
+                Main.file.writeUTF(String.valueOf(registroBorrado));
+            } else {
+                Main.file.writeInt(-999);
+            }
             return true;
         }
         return false;
     }
-
-//    public boolean ModificarRegistro(String k, String nameFile, String nuevo) throws IOException {
-//        int value = k.chars().reduce(0, Integer::sum);
-//        EstructuraIndex nodo = Main.arbol.search(value);
-//        //  nodo.
-//        if (nodo != null) {
-//            Main.arbol.Modify(value, nuevo);
-//            //Files.deleteIfExists(Paths.get(Main.fileName + "\\" + Main.name + name + "Index.txt"));
-//            Main.indexFile = new RandomAccessFile(Main.fileName + "\\" + Main.name + nameFile + "Index.txt", "rw");
-//            Main.indexFile.setLength(0);
-//            Main.indexFile.seek(0);
-//            return true;
-//        }
-//        return false;
-//    }
 
     public void CrearIndex(String nombre) throws IOException {
         int position = 0;

@@ -296,12 +296,19 @@ public class MenuCampos extends javax.swing.JPanel {
         }
         if (!Main.key.equals("")) {
             jLabel3.setVisible(false);
+            checkBoxSi.setSelected(false);
+            checkBoxNo.setSelected(true);
             checkBoxSi.setVisible(false);
             checkBoxNo.setVisible(false);
         }
 
         if (checkBoxSi.isSelected() && checkBoxNo.isSelected()) {
             JOptionPane.showMessageDialog(null, "¡Solo debe seleccionar si es llave primaria o no!", "Archivos", JOptionPane.ERROR_MESSAGE);
+            if (!Main.key.equals("")) {
+            jLabel3.setVisible(false);
+             checkBoxSi.setSelected(false);
+            checkBoxNo.setSelected(true);
+        }
         } else if (TextFieldNombre.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "¡Nombre de Campo no puede ser vacío!", "Archivos", JOptionPane.ERROR_MESSAGE);
         } else if (size == 0) {

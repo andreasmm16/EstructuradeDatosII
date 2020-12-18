@@ -21,7 +21,7 @@ public class IntroducirRegistros extends javax.swing.JPanel {
     String tipoCampo;
     int campoSize;
     boolean isKey;
-
+    int posValue = 0;
     public IntroducirRegistros() throws IOException {
         initComponents();
         limpiarTabla(jTable1);
@@ -92,6 +92,8 @@ public class IntroducirRegistros extends javax.swing.JPanel {
             }
         }
 //de aqui es para las columnas
+        boolean cerrar = true;
+
         Main.file.seek(0);
         Main.file.readInt();
         Main.file.readInt();
@@ -104,7 +106,12 @@ public class IntroducirRegistros extends javax.swing.JPanel {
             Main.file.readChar();
             model.addColumn(String.valueOf(Main.file.readInt()));
             Main.file.readChar();
-            Main.file.readBoolean();
+            boolean isKeyy = Main.file.readBoolean();
+             if (!isKeyy && cerrar) {
+                posValue += 2;
+            } else {
+                cerrar = false;
+            }
             Main.file.readChar();
         }
         System.out.println(Main.cantRegis);
@@ -250,8 +257,7 @@ public class IntroducirRegistros extends javax.swing.JPanel {
             x = 0;
             cont = 0;
 
-            if (ver) {
-                System.out.println(Main.cantRegis);
+            if (ver) {              
                 Main.file.seek(0);
                 Main.cantRegis++;
                 Main.file.writeInt(Main.cantRegis);
@@ -308,7 +314,7 @@ public class IntroducirRegistros extends javax.swing.JPanel {
             Logger.getLogger(IntroducirRegistros.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-
+System.out.println(Main.cantRegis);
     }//GEN-LAST:event_ingresarButtonMouseClicked
 
     private void ingresarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarButtonActionPerformed

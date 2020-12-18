@@ -99,7 +99,6 @@ public class BorrarRegistro extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "¡Registro Borrado Exitosamente!", "Archivos", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "¡Registro No Encontrado!", "Archivos", JOptionPane.ERROR_MESSAGE);
-
             }
 
         } catch (IOException ex) {
