@@ -1,6 +1,5 @@
 package ProyectoFileManager;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -37,7 +36,6 @@ public class convertidor_panel extends javax.swing.JPanel {
         guardar_como = new javax.swing.JButton();
         XML_Radio = new javax.swing.JRadioButton();
         CSV_Radio = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
 
         setLayout(null);
 
@@ -56,7 +54,7 @@ public class convertidor_panel extends javax.swing.JPanel {
             }
         });
         add(abrir_archivo);
-        abrir_archivo.setBounds(130, 160, 140, 23);
+        abrir_archivo.setBounds(130, 160, 140, 29);
 
         nombre_archivo.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         nombre_archivo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -74,7 +72,7 @@ public class convertidor_panel extends javax.swing.JPanel {
             }
         });
         add(guardar_como);
-        guardar_como.setBounds(140, 230, 120, 23);
+        guardar_como.setBounds(140, 230, 120, 29);
 
         RadioGroup.add(XML_Radio);
         XML_Radio.setText("XML");
@@ -86,19 +84,12 @@ public class convertidor_panel extends javax.swing.JPanel {
         CSV_Radio.setText("CSV");
         add(CSV_Radio);
         CSV_Radio.setBounds(120, 60, 70, 23);
-
-        jButton1.setText("Salir");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-        add(jButton1);
-        jButton1.setBounds(310, 270, 53, 23);
     }// </editor-fold>//GEN-END:initComponents
 
     private void abrir_archivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_abrir_archivoMouseClicked
-                JFileChooser fc = new JFileChooser();
+        JFileChooser fc = new JFileChooser();
+        if(nombre_archivo.getText() != "\'Sin Seleccion\'")
+            fc.setCurrentDirectory(new java.io.File(nombre_archivo.getText()).getParentFile());
         fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int return_val = fc.showOpenDialog(this);
         if(return_val == JFileChooser.APPROVE_OPTION){
@@ -117,18 +108,12 @@ public class convertidor_panel extends javax.swing.JPanel {
             try{
                 FILE_TYPE tipo_archivo = (RadioGroup.getSelection() == XML_Radio.getModel()) ? FILE_TYPE.XML : FILE_TYPE.CSV;
                 XML_converter.convert(nombre_archivo.getText(), fc.getSelectedFile().getPath(), tipo_archivo);
-                 JOptionPane.showMessageDialog(null, "¡Archivo creado exitosamente!", "Archivos", JOptionPane.INFORMATION_MESSAGE);
             }catch(Exception e){
                 
             }
         
         }
     }//GEN-LAST:event_guardar_comoMouseClicked
-
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        MenuPrincipal mp = new MenuPrincipal();
-        Main.frame.Panel(mp);
-    }//GEN-LAST:event_jButton1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -137,7 +122,6 @@ public class convertidor_panel extends javax.swing.JPanel {
     private javax.swing.JRadioButton XML_Radio;
     private javax.swing.JButton abrir_archivo;
     private javax.swing.JButton guardar_como;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel nombre_archivo;
     // End of variables declaration//GEN-END:variables
