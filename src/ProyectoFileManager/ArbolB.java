@@ -3,6 +3,7 @@ package ProyectoFileManager;
 import java.io.IOException;
 import java.util.ArrayList;
 
+
 //public class ArbolB {
 //
 //    private int T;
@@ -487,6 +488,7 @@ class BTree {
                     while (!successorNode.mIsLeafNode) { // Therefore only descend to the previous node (erasureNode) of the predecessor node and delete the key using 3.
                         erasureNode = successorNode;
                         successorNode = successorNode.mChildNodes[0];
+                        System.out.println("d");
                     }
                     node.mKeys[i] = successorNode.mKeys[0];
                     node.mEstructuraIndexs[i] = successorNode.mEstructuraIndexs[0];
