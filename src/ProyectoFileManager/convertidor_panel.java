@@ -1,5 +1,6 @@
 package ProyectoFileManager;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -37,16 +38,20 @@ public class convertidor_panel extends javax.swing.JPanel {
         XML_Radio = new javax.swing.JRadioButton();
         CSV_Radio = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setLayout(null);
 
         jLabel3.setForeground(new java.awt.Color(110, 110, 110));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Archivo a Convertir: ");
         jLabel3.setAutoscrolls(true);
         jLabel3.setFocusable(false);
         jLabel3.setRequestFocusEnabled(false);
         add(jLabel3);
-        jLabel3.setBounds(140, 90, 130, 30);
+        jLabel3.setBounds(130, 110, 160, 30);
 
         abrir_archivo.setText("Abrir Archivo");
         abrir_archivo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -55,7 +60,7 @@ public class convertidor_panel extends javax.swing.JPanel {
             }
         });
         add(abrir_archivo);
-        abrir_archivo.setBounds(130, 160, 140, 23);
+        abrir_archivo.setBounds(140, 180, 140, 23);
 
         nombre_archivo.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         nombre_archivo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -64,7 +69,7 @@ public class convertidor_panel extends javax.swing.JPanel {
         nombre_archivo.setFocusable(false);
         nombre_archivo.setRequestFocusEnabled(false);
         add(nombre_archivo);
-        nombre_archivo.setBounds(10, 120, 380, 30);
+        nombre_archivo.setBounds(20, 140, 380, 30);
 
         guardar_como.setText("Guardar como");
         guardar_como.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -73,18 +78,18 @@ public class convertidor_panel extends javax.swing.JPanel {
             }
         });
         add(guardar_como);
-        guardar_como.setBounds(140, 230, 120, 23);
+        guardar_como.setBounds(40, 250, 120, 30);
 
         RadioGroup.add(XML_Radio);
         XML_Radio.setText("XML");
         add(XML_Radio);
-        XML_Radio.setBounds(210, 60, 90, 23);
+        XML_Radio.setBounds(230, 80, 60, 23);
 
         RadioGroup.add(CSV_Radio);
         CSV_Radio.setSelected(true);
         CSV_Radio.setText("CSV");
         add(CSV_Radio);
-        CSV_Radio.setBounds(120, 60, 70, 23);
+        CSV_Radio.setBounds(130, 80, 70, 23);
 
         jButton1.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ProyectoFileManager/sign-out.png"))); // NOI18N
@@ -95,7 +100,24 @@ public class convertidor_panel extends javax.swing.JPanel {
             }
         });
         add(jButton1);
-        jButton1.setBounds(300, 260, 100, 40);
+        jButton1.setBounds(290, 260, 110, 40);
+
+        jLabel1.setFont(new java.awt.Font("Tw Cen MT", 1, 30)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Exportar Archivos");
+        add(jLabel1);
+        jLabel1.setBounds(70, 0, 280, 50);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Tipo de archivo");
+        add(jLabel2);
+        jLabel2.setBounds(120, 55, 180, 20);
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ProyectoFileManager/Fondo.png"))); // NOI18N
+        add(jLabel4);
+        jLabel4.setBounds(-6, -6, 420, 320);
     }// </editor-fold>//GEN-END:initComponents
 
     private void abrir_archivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_abrir_archivoMouseClicked
@@ -120,6 +142,7 @@ public class convertidor_panel extends javax.swing.JPanel {
             try{
                 FILE_TYPE tipo_archivo = (RadioGroup.getSelection() == XML_Radio.getModel()) ? FILE_TYPE.XML : FILE_TYPE.CSV;
                 XML_converter.convert(nombre_archivo.getText(), fc.getSelectedFile().getPath(), tipo_archivo);
+                JOptionPane.showMessageDialog(null, "¡Archivo exportado exitosamente!", "Archivos", JOptionPane.INFORMATION_MESSAGE);
             }catch(Exception e){
                 
             }
@@ -128,7 +151,8 @@ public class convertidor_panel extends javax.swing.JPanel {
     }//GEN-LAST:event_guardar_comoMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        
+            MenuPrincipal mp = new MenuPrincipal();
+            Main.frame.Panel(mp);
     }//GEN-LAST:event_jButton1MouseClicked
 
 
@@ -139,7 +163,10 @@ public class convertidor_panel extends javax.swing.JPanel {
     private javax.swing.JButton abrir_archivo;
     private javax.swing.JButton guardar_como;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel nombre_archivo;
     // End of variables declaration//GEN-END:variables
 }

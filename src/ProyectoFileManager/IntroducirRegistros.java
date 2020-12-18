@@ -251,7 +251,7 @@ public class IntroducirRegistros extends javax.swing.JPanel {
             String value = tmp2.codePoints().mapToObj((t) -> "" + t).collect(joining());
 
             if (Main.arbol.search2(value) != null) {
-                JOptionPane.showMessageDialog(null, "¡Error existe ya este campo clave!", "Archivos", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "¡Ya existe este campo clave!", "ERROR", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
