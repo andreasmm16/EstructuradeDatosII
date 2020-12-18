@@ -243,7 +243,6 @@ public class MenuArchivos extends javax.swing.JPanel {
                 jLabel3.setVisible(true);
                 comboBox.setVisible(true);
                 selectButton.setVisible(true);
-                System.out.println("si entre");
                 nuevoButton.setVisible(false);
                 abrirButton.setVisible(false);
                 salvarButton.setVisible(false);
