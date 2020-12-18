@@ -94,15 +94,13 @@ public class BorrarRegistro extends javax.swing.JPanel {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         try {
-           
+
             if (Main.index.borrarRegistro(textfield.getText(), nombre_campo)) {
                 JOptionPane.showMessageDialog(null, "¡Registro Borrado Exitosamente!", "Archivos", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "¡Registro No Encontrado!", "Archivos", JOptionPane.ERROR_MESSAGE);
             }
-
-        } catch (IOException ex) {
-
+         } catch (IOException ex) {
             Logger.getLogger(BorrarRegistro.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1MouseClicked

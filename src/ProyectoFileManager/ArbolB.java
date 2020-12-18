@@ -3,250 +3,6 @@ package ProyectoFileManager;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
-//public class ArbolB {
-//
-//    private int T;
-//
-//    public class Node {
-//
-//        int n;
-//        EstructuraIndex key[] = new EstructuraIndex[(2 * T) - 1];
-//        Node child[] = new Node[2 * T];
-//        boolean leaf = true;
-//
-//        public int Find(String k) {
-//            for (int i = 0; i < this.n; i++) {
-//                int cmp = this.key[i].valor.compareTo(k);
-//                if (cmp == 0) {
-//                    return key[i].puntero_registro;
-//                }
-//            }
-//            return -1;
-//        }
-//
-//        public void Delete(String k) {
-//            for (int i = 0; i < this.n; i++) {
-//                if (this.key[i] != null) {
-//                    int cmp = this.key[i].valor.compareTo(k);
-//                    if (cmp == 0) {
-//                        this.key[i] = null;
-//                    }
-//                }
-//            }
-//        }
-//
-//        public void Modify(String k, String nuevo) {
-//            for (int i = 0; i < this.n; i++) {
-//                if (this.key[i] != null) {
-//                    int cmp = this.key[i].valor.compareTo(k);
-//                    if (cmp == 0) {
-//                        this.key[i].valor = nuevo;
-//                    }
-//                }
-//            }
-//        }
-//    }
-//
-//    public ArbolB(int t) {
-//        T = t;
-//        root = new Node();
-//        root.n = 0;
-//        root.leaf = true;
-//    }
-//
-//    private Node root;
-//
-//    // Search key
-//    private Node Search(Node x, String key) {
-//        int i = 0;
-//        if (x == null) {
-//            return x;
-//        }
-//        for (i = 0; i < x.n; i++) {
-//            String str = "name";
-//            int sum = key.chars().reduce(0, Integer::sum);
-//            int cmp = x.key[i].valor.chars().reduce(0, Integer::sum);
-//
-//          
-//            if (cmp == sum) {
-//                return x;
-//            }
-//        }
-//        if (x.leaf) {
-//            return null;
-//        } else {
-//            return Search(x.child[i], key);
-//        }
-//    }
-//
-//    
-//    //
-////    int i = 0;
-////    if (x == null)
-////      return x;
-////    for (i = 0; i < x.n; i++) {
-////      if (key < x.key[i]) {
-////        break;
-////      }
-////      if (key == x.key[i]) {
-////        return x;
-////      }
-////    }
-////    if (x.leaf) {
-////      return null;
-////    } else {
-////      return Search(x.child[i], key);
-////    }
-//    // Splitting the node
-//    private void Split(Node x, int pos, Node y) {
-//        Node z = new Node();
-//        z.leaf = y.leaf;
-//        z.n = T - 1;
-//        for (int j = 0; j < T - 1; j++) {
-//            z.key[j] = y.key[j + T];
-//        }
-//        if (!y.leaf) {
-//            for (int j = 0; j < T; j++) {
-//                z.child[j] = y.child[j + T];
-//            }
-//        }
-//        y.n = T - 1;
-//        for (int j = x.n; j >= pos + 1; j--) {
-//            x.child[j + 1] = x.child[j];
-//        }
-//        x.child[pos + 1] = z;
-//
-//        for (int j = x.n - 1; j >= pos; j--) {
-//            x.key[j + 1] = x.key[j];
-//        }
-//        x.key[pos] = y.key[T - 1];
-//        x.n = x.n + 1;
-//    }
-//
-//    // Inserting a value
-//    public void Insert(final EstructuraIndex key) {
-//        Node r = root;
-//
-//        if (r.n == 2 * T - 1) {
-//            Node s = new Node();
-//            root = s;
-//            s.leaf = false;
-//            s.n = 0;
-//            s.child[0] = r;
-//            Split(s, 0, r);
-//            insertValue(s, key);
-//        } else {
-//            insertValue(r, key);
-//        }
-//    }
-//
-//    // Insert the node
-//    final private void insertValue(Node x, EstructuraIndex k) {
-//
-//        if (x.leaf) {
-//            int cmp = 0;
-//            int i = 0;
-//            if (x.key[i] != null) {
-//                cmp = k.valor.compareTo(x.key[i].valor);
-//
-//            }
-//
-//            for (i = x.n - 1; i >= 0 && cmp < 0; i--) {
-//                x.key[i + 1] = x.key[i];
-//            }
-//            x.key[i + 1] = k;
-//            x.n = x.n + 1;
-//        } else {
-//            int i = 0;
-//            int cmp = k.valor.compareTo(x.key[i].valor);
-//
-//            for (i = x.n - 1; i >= 0 && cmp < 0; i--) {
-//            }
-//            i++;
-//            Node tmp = x.child[i];
-//            if (tmp.n == 2 * T - 1) {
-//                Split(x, i, tmp);
-//                int cmp2 = k.valor.compareTo(x.key[i].valor);
-//
-//                if (cmp2 > 0) {
-//                    i++;
-//                }
-//            }
-//            insertValue(x.child[i], k);
-//        }
-//    }
-//
-//    public void Show() {
-//        Show(root);
-//    }
-//
-//    public void WriteIndexFile() throws IOException {
-//        WriteIndexFile(root);
-//    }
-//
-//    // Display
-//    private void Show(Node x) {
-//        assert (x == null);
-//        for (int i = 0; i < x.n; i++) {
-//            System.out.print(x.key[i] + " ");
-//
-//        }
-//        if (!x.leaf) {
-//            for (int i = 0; i < x.n + 1; i++) {
-//                Show(x.child[i]);
-//            }
-//        }
-//    }
-//
-//    private void WriteIndexFile(Node x) throws IOException {
-//
-//        assert (x == null);
-//        for (int i = 0; i < x.n; i++) {
-//            if (x.key[i] != null) {
-//                Main.indexFile.writeUTF(x.key[i].valor + ",");
-//                Main.indexFile.writeInt(x.key[i].puntero_registro);
-//                Main.indexFile.writeUTF("|");
-//            }
-//
-//        }
-//        if (!x.leaf) {
-//            for (int i = 0; i < x.n + 1; i++) {
-//                WriteIndexFile(x.child[i]);
-//            }
-//        }
-//    }
-//
-//    public Node Contain(String k) {
-//        Node search = this.Search(root, k);
-//        if (search != null) {
-//            return search;
-//        }
-//        return null;
-//    }
-//
-////  public static void main(String[] args) {
-////    ArbolB b = new ArbolB(3);
-////    b.Insert(10);
-////    b.Insert(20);
-////    b.Insert(30);
-////    b.Insert(40);
-////    b.Insert(50);
-////    b.Insert(60);
-////    b.Insert(70);
-////        b.Insert(80);
-////
-////b.Insert(90);
-////    b.Show();
-////
-////    if (b.Contain(12)) {
-////      System.out.println("\nfound");
-////    } else {
-////      System.out.println("\nnot found");
-////    }
-////    ;
-////  }
-//}
 class BTree {
 
     private static final int T = 3;
@@ -255,22 +11,23 @@ class BTree {
     private static final int RIGHT_CHILD_NODE = 1;
 
     class Node {
+//19
 
         public int mNumKeys = 0;
-        public int[] mKeys = new int[(2 * T) - 1];
+        public String[] mKeys = new String[(2 * T) - 1];
         public EstructuraIndex[] mEstructuraIndexs = new EstructuraIndex[(2 * T) - 1];
         public Node[] mChildNodes = new Node[2 * T];
         public boolean mIsLeafNode;
 
-        int binarySearch(int key) {
+        int binarySearch(String key) {
             int leftIndex = 0;
             int rightIndex = mNumKeys - 1;
 
             while (leftIndex <= rightIndex) {
                 final int middleIndex = leftIndex + ((rightIndex - leftIndex) / 2);
-                if (mKeys[middleIndex] < key) {
+                if (mKeys[middleIndex].compareTo(key) < 0) {
                     leftIndex = middleIndex + 1;
-                } else if (mKeys[middleIndex] > key) {
+                } else if (mKeys[middleIndex].compareTo(key) > 0) {
                     rightIndex = middleIndex - 1;
                 } else {
                     return middleIndex;
@@ -280,7 +37,7 @@ class BTree {
             return -1;
         }
 
-        boolean contains(int key) {
+        boolean contains(String key) {
             return binarySearch(key) != -1;
         }
 
@@ -297,7 +54,7 @@ class BTree {
                         }
                     }
                 }
-                mKeys[i] = 0;
+                mKeys[i] = "0";
                 mEstructuraIndexs[i] = null;
                 if (!mIsLeafNode) {
                     if (i >= index + leftOrRightChild) {
@@ -322,9 +79,10 @@ class BTree {
             }
         }
 
-        int subtreeRootNodeIndex(int key) {
+        int subtreeRootNodeIndex(String key) {
             for (int i = 0; i < mNumKeys; i++) {
-                if (key < mKeys[i]) {
+                //25        50
+                if (key.compareTo(mKeys[i]) < 0) {
                     return i;
                 }
             }
@@ -337,7 +95,7 @@ class BTree {
         mRootNode.mIsLeafNode = true;
     }
 
-    public void add(int key, EstructuraIndex object) {
+    public void add(String key, EstructuraIndex object) {
         Node rootNode = mRootNode;
         if (!update(mRootNode, key, object)) {
             if (rootNode.mNumKeys == (2 * T - 1)) {
@@ -353,10 +111,9 @@ class BTree {
         }
     }
 
-    public void Modify(int oldValue, int newValue, EstructuraIndex object) {
-        EstructuraIndex s = search(oldValue);
-    }
-
+//    public void Modify(int oldValue, int newValue, EstructuraIndex object) {
+//        EstructuraIndex s = search(oldValue);
+//    }
     // Split the node, node, of a B-Tree into two nodes that both contain T-1 elements and move node's median key up to the parentNode.
     // This method will only be called if node is full; node is the i-th child of parentNode.
     void splitChildNode(Node parentNode, int i, Node node) {
@@ -376,7 +133,7 @@ class BTree {
             }
         }
         for (int j = T; j < node.mNumKeys; j++) {
-            node.mKeys[j] = 0;
+            node.mKeys[j] = "0";
             node.mEstructuraIndexs[j] = null;
         }
         node.mNumKeys = T - 1;
@@ -392,17 +149,17 @@ class BTree {
         }
         parentNode.mKeys[i] = node.mKeys[T - 1];
         parentNode.mEstructuraIndexs[i] = node.mEstructuraIndexs[T - 1];
-        node.mKeys[T - 1] = 0;
+        node.mKeys[T - 1] = "0";
         node.mEstructuraIndexs[T - 1] = null;
         parentNode.mNumKeys++;
     }
 
     // Insert an element into a B-Tree. (The element will ultimately be inserted into a leaf node). 
-    void insertIntoNonFullNode(Node node, int key, EstructuraIndex object) {
+    void insertIntoNonFullNode(Node node, String key, EstructuraIndex object) {
         int i = node.mNumKeys - 1;
         if (node.mIsLeafNode) {
             // Since node is not a full node insert the new element into its proper place within node.
-            while (i >= 0 && key < node.mKeys[i]) {
+            while (i >= 0 && key.compareTo(node.mKeys[i]) < 0) {
                 node.mKeys[i + 1] = node.mKeys[i];
                 node.mEstructuraIndexs[i + 1] = node.mEstructuraIndexs[i];
                 i--;
@@ -414,13 +171,13 @@ class BTree {
         } else {
             // Move back from the last key of node until we find the child pointer to the node
             // that is the root node of the subtree where the new element should be placed.
-            while (i >= 0 && key < node.mKeys[i]) {
+            while (i >= 0 && key.compareTo(node.mKeys[i]) < 0) {
                 i--;
             }
             i++;
             if (node.mChildNodes[i].mNumKeys == (2 * T - 1)) {
                 splitChildNode(node, i, node.mChildNodes[i]);
-                if (key > node.mKeys[i]) {
+                if (key.compareTo(node.mKeys[i]) > 0) {
                     i++;
                 }
             }
@@ -428,7 +185,7 @@ class BTree {
         }
     }
 
-    public void delete(int key) {
+    public void delete(String key) {
         delete(mRootNode, key);
     }
 
@@ -461,7 +218,7 @@ class BTree {
         return string;
     }
 
-    public void delete(Node node, int key) {
+    public void delete(Node node, String key) {
         if (node.mIsLeafNode) { // 1. If the key is in node and node is a leaf node, then delete the key from node.
             int i;
             if ((i = node.binarySearch(key)) != -1) { // key is i-th key of node if node contains key.
@@ -488,7 +245,6 @@ class BTree {
                     while (!successorNode.mIsLeafNode) { // Therefore only descend to the previous node (erasureNode) of the predecessor node and delete the key using 3.
                         erasureNode = successorNode;
                         successorNode = successorNode.mChildNodes[0];
-                        System.out.println("d");
                     }
                     node.mKeys[i] = successorNode.mKeys[0];
                     node.mEstructuraIndexs[i] = successorNode.mEstructuraIndexs[0];
@@ -560,7 +316,7 @@ class BTree {
     // Merge two nodes and keep the median key (element) empty.
     int mergeNodes(Node dstNode, Node srcNode) {
         int medianKeyIndex;
-        if (srcNode.mKeys[0] < dstNode.mKeys[dstNode.mNumKeys - 1]) {
+        if (srcNode.mKeys[0].compareTo(dstNode.mKeys[dstNode.mNumKeys - 1]) < 0) {
             int i;
             // Shift all elements of dstNode right by srcNode.mNumKeys + 1 to make place for the srcNode and the median key.
             if (!dstNode.mIsLeafNode) {
@@ -576,7 +332,7 @@ class BTree {
 
             // Clear the median key (element).
             medianKeyIndex = srcNode.mNumKeys;
-            dstNode.mKeys[medianKeyIndex] = 0;
+            dstNode.mKeys[medianKeyIndex] = "0";
             dstNode.mEstructuraIndexs[medianKeyIndex] = null;
 
             // Copy the srcNode's elements into dstNode.
@@ -593,7 +349,7 @@ class BTree {
         } else {
             // Clear the median key (element).
             medianKeyIndex = dstNode.mNumKeys;
-            dstNode.mKeys[medianKeyIndex] = 0;
+            dstNode.mKeys[medianKeyIndex] = "0";
             dstNode.mEstructuraIndexs[medianKeyIndex] = null;
 
             // Copy the srcNode's elements into dstNode.
@@ -627,40 +383,39 @@ class BTree {
         }
     }
 
-    public EstructuraIndex Modify(int key, String newKey) {
-        return Modify(mRootNode, key, newKey);
-    }
-
-    public EstructuraIndex Modify(Node node, int key, String newKey) {
-        int i = 0;
-        while (i < node.mNumKeys && key > node.mKeys[i]) {
-            i++;
-        }
-        if (i < node.mNumKeys && key == node.mKeys[i]) {
-            int value = newKey.chars().reduce(0, Integer::sum);
-
-            node.mKeys[i] = value;
-            node.mEstructuraIndexs[i].valor = newKey;
-            return node.mEstructuraIndexs[i];
-        }
-        if (node.mIsLeafNode) {
-            return null;
-        } else {
-            return search(node.mChildNodes[i], key);
-        }
-    }
-
-    public EstructuraIndex search(int key) {
+//    public EstructuraIndex Modify(String key, String newKey) {
+//        return Modify(mRootNode, key, newKey);
+//    }
+//
+//    public EstructuraIndex Modify(Node node, String key, String newKey) {
+//        int i = 0;
+//        while (i < node.mNumKeys && key > node.mKeys[i]) {
+//            i++;
+//        }
+//        if (i < node.mNumKeys && key.equals(node.mKeys[i])) {
+//            int value = newKey.chars().reduce(0, Integer::sum);
+//
+//            node.mKeys[i] = value;
+//            node.mEstructuraIndexs[i].valor = newKey;
+//            return node.mEstructuraIndexs[i];
+//        }
+//        if (node.mIsLeafNode) {
+//            return null;
+//        } else {
+//            return search(node.mChildNodes[i], key);
+//        }
+//    }
+    public EstructuraIndex search(String key) {
         return search(mRootNode, key);
     }
 
     // Recursive search method.
-    public EstructuraIndex search(Node node, int key) {
+    public EstructuraIndex search(Node node, String key) {
         int i = 0;
-        while (i < node.mNumKeys && key > node.mKeys[i]) {
+        while (i < node.mNumKeys && key.compareTo(node.mKeys[i]) > 0) {
             i++;
         }
-        if (i < node.mNumKeys && key == node.mKeys[i]) {
+        if (key.equals(node.mKeys[i])) {
             return node.mEstructuraIndexs[i];
         }
         if (node.mIsLeafNode) {
@@ -670,18 +425,17 @@ class BTree {
         }
     }
 
-    public EstructuraIndex search2(int key) {
+    public EstructuraIndex search2(String key) {
         return search2(mRootNode, key);
     }
-
-    // Iterative search method.
-    public EstructuraIndex search2(Node node, int key) {
+//     Iterative search method.
+    public EstructuraIndex search2(Node node, String key) {
         while (node != null) {
             int i = 0;
-            while (i < node.mNumKeys && key > node.mKeys[i]) {
+            while (i < node.mNumKeys &&  key.compareTo(node.mKeys[i]) > 0) {
                 i++;
             }
-            if (i < node.mNumKeys && key == node.mKeys[i]) {
+            if (i < node.mNumKeys && key.equals( node.mKeys[i]) ){
                 return node.mEstructuraIndexs[i];
             }
             if (node.mIsLeafNode) {
@@ -692,14 +446,13 @@ class BTree {
         }
         return null;
     }
-
-    private boolean update(Node node, int key, EstructuraIndex object) {
+    private boolean update(Node node, String key, EstructuraIndex object) {
         while (node != null) {
             int i = 0;
-            while (i < node.mNumKeys && key > node.mKeys[i]) {
+            while (i < node.mNumKeys && key.compareTo(node.mKeys[i]) > 0) {
                 i++;
             }
-            if (i < node.mNumKeys && key == node.mKeys[i]) {
+            if (i < node.mNumKeys && key.equals(node.mKeys[i])) {
                 node.mEstructuraIndexs[i] = object;
                 return true;
             }
@@ -718,13 +471,13 @@ class BTree {
         if (node != null) {
             if (node.mIsLeafNode) {
                 for (int i = 0; i < node.mNumKeys; i++) {
-                    string += node.mEstructuraIndexs[i] + ", ";
+                    string += node.mKeys[i] + ", ";
                 }
             } else {
                 int i;
                 for (i = 0; i < node.mNumKeys; i++) {
                     string += printBTree(node.mChildNodes[i]);
-                    string += node.mEstructuraIndexs[i] + ", ";
+                    string += node.mKeys[i] + ", ";
                 }
                 string += printBTree(node.mChildNodes[i]);
             }
@@ -735,33 +488,31 @@ class BTree {
     public String toString() {
         return printBTree(mRootNode);
     }
-
-    void validate() throws Exception {
-        ArrayList<Integer> array = getKeys(mRootNode);
-        for (int i = 0; i < array.size() - 1; i++) {
-            if (array.get(i) >= array.get(i + 1)) {
-                throw new Exception("B-Tree invalid: " + array.get(i) + " greater than " + array.get(i + 1));
-            }
-        }
-    }
-
+//    void validate() throws Exception {
+//        ArrayList<Integer> array = getKeys(mRootNode);
+//        for (int i = 0; i < array.size() - 1; i++) {
+//            if (array.get(i) >= array.get(i + 1)) {
+//                throw new Exception("B-Tree invalid: " + array.get(i) + " greater than " + array.get(i + 1));
+//            }
+//        }
+//    }
     // Inorder walk over the tree.
-    ArrayList<Integer> getKeys(Node node) {
-        ArrayList<Integer> array = new ArrayList<Integer>();
-        if (node != null) {
-            if (node.mIsLeafNode) {
-                for (int i = 0; i < node.mNumKeys; i++) {
-                    array.add(node.mKeys[i]);
-                }
-            } else {
-                int i;
-                for (i = 0; i < node.mNumKeys; i++) {
-                    array.addAll(getKeys(node.mChildNodes[i]));
-                    array.add(node.mKeys[i]);
-                }
-                array.addAll(getKeys(node.mChildNodes[i]));
-            }
-        }
-        return array;
-    }
+//    ArrayList<Integer> getKeys(Node node) {
+//        ArrayList<Integer> array = new ArrayList<Integer>();
+//        if (node != null) {
+//            if (node.mIsLeafNode) {
+//                for (int i = 0; i < node.mNumKeys; i++) {
+//                    array.add(node.mKeys[i]);
+//                }
+//            } else {
+//                int i;
+//                for (i = 0; i < node.mNumKeys; i++) {
+//                    array.addAll(getKeys(node.mChildNodes[i]));
+//                    array.add(node.mKeys[i]);
+//                }
+//                array.addAll(getKeys(node.mChildNodes[i]));
+//            }
+//        }
+//        return array;
+//    }
 }

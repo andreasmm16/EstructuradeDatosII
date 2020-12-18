@@ -8,14 +8,8 @@ package ProyectoFileManager;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.control.ComboBox;
 import javax.swing.JOptionPane;
 
 public class BuscarRegistro extends javax.swing.JPanel {
@@ -28,15 +22,16 @@ public class BuscarRegistro extends javax.swing.JPanel {
         initComponents();
         // Main.index.getIndex(); //Carga a memoria todos los registros de campo llave al Arbol
         jComboBox1.removeAllItems();
+
         Main.campos.forEach((campo) -> {//Extraer Campo clave
             jComboBox1.addItem(campo.getNombre());
             if (campo.llave) {
                 nombre_campo = campo.getNombre();
-
                 size = campo.getSize();
                 tipo = campo.getTipo();
             }
         });
+
     }
 
     @SuppressWarnings("unchecked")
@@ -126,7 +121,7 @@ public class BuscarRegistro extends javax.swing.JPanel {
             }
             Main.indexFile = new RandomAccessFile(Main.fileName + "\\" + Main.name + x + "Index.txt", "rw");
             Main.index.cargarIndices();
-            //Main.index.getIndex();
+
             int size = 0;
             Main.campos.forEach((campo) -> {
                 if (campo.getNombre().equals(x) && !campo.getTipo().equals("int")) {

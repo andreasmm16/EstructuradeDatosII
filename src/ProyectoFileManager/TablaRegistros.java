@@ -56,14 +56,14 @@ public class TablaRegistros extends javax.swing.JPanel {
 
                 if (fields.get(i).equals("char")) {
                     row[i] = Main.file.readUTF();
-                    if (row[i].toString().charAt(0)=='*') {
+                    if (row[i].toString().charAt(0) == '-' && row[i].toString().charAt(1) == '1') {
                         esRegistro = false;
                     }
-                    
+
                 } else {
                     row[i] = (Integer) Main.file.readInt();
-                    if (row[i].toString().equals("-999")) {
-                        esRegistro =false;
+                    if (row[i].toString().equals("-1")) {
+                        esRegistro = false;
                     }
                 }
             }

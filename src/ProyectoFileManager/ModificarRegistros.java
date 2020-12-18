@@ -63,33 +63,30 @@ public class ModificarRegistros extends javax.swing.JPanel {
             campos++;
         }
 
-        int x = 0;
+          int x = 0;
         while (x < Main.cantRegis) {
             boolean esRegistro = true;
-
             Object[] row = new Object[campos];
             for (int i = 0; i < campos; i++) {
 
                 if (fields.get(i).equals("char")) {
-                    String value = Main.file.readUTF();
-                    row[i] = trim(value);
-                    if (row[i].toString().charAt(0) == '*') {
+                    row[i] = Main.file.readUTF();
+                    if (row[i].toString().charAt(0) == '-' && row[i].toString().charAt(1) == '1') {
                         esRegistro = false;
                     }
+
                 } else {
                     row[i] = (Integer) Main.file.readInt();
-                    if (row[i].toString().equals("-999")) {
+                    if (row[i].toString().equals("-1")) {
                         esRegistro = false;
                     }
                 }
             }
             if (esRegistro) {
                 model.addRow(row);
-
             }
             x++;
         }
-        System.out.println("Campos" + fields.toArray());
         this.jTable1.setModel(model);
         campos_archivo.forEach((campo) -> {
             if (campo.llave) {

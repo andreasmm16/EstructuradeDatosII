@@ -22,7 +22,7 @@ public class LinkedList {
 
     public boolean estaVacia() {
 
-        if(this.head.getPosicion()==-1){
+        if(this.head == null){
             return true;
         }else
             return false;
@@ -41,7 +41,6 @@ public class LinkedList {
             Main.file.writeInt(head.getPosicion());
         } else {
             Node tmp = head;
-
             while (tmp.getSiguiente() != null) {
                 tmp = tmp.getSiguiente();
             }

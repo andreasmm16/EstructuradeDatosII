@@ -5,6 +5,7 @@ import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static java.util.stream.Collectors.joining;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -243,7 +244,18 @@ public class IntroducirRegistros extends javax.swing.JPanel {
 
     private void ingresarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ingresarButtonMouseClicked
         try {
+            System.out.println(posValue);
+            Main.indexFile = new RandomAccessFile(Main.fileName + "\\" + Main.name + campoClave + "Index.txt", "rw");
+            Main.index.cargarIndices();
+            String tmp2 = model.getValueAt(0, posValue).toString();
+            String value = tmp2.codePoints().mapToObj((t) -> "" + t).collect(joining());
 
+            if (Main.arbol.search2(value) != null) {
+                JOptionPane.showMessageDialog(null, "¡Error existe ya este campo clave!", "Archivos", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            System.out.println(tmp2);
             int fc = campos * 2;
             int x = 0;
             int cont = 0;
@@ -259,12 +271,14 @@ public class IntroducirRegistros extends javax.swing.JPanel {
             cont = 0;
 
             if (ver) {
-                Main.file.seek(0);
-                Main.cantRegis++;
-                Main.file.writeInt(Main.cantRegis);
+                System.out.println(Main.cantRegis);
+                int posDisponible = Main.lista.posDisponible();
 
                 // a partir de aquí es el ingreso de el registro al archivo de datos
-                if (Main.lista.posDisponible() == -1) {
+                if (posDisponible == -1) {
+                    Main.file.seek(0);
+                    Main.cantRegis++;
+                    Main.file.writeInt(Main.cantRegis);
                     int posicionRegistro = (int) Main.file.length();
                     Main.file.seek(Main.file.length());
                     while (x < fc) {
@@ -304,6 +318,47 @@ public class IntroducirRegistros extends javax.swing.JPanel {
                     limpiarTabla(jTable1);
                     model.addRow(new Object[]{null});
                     this.jTable1.setModel(model);
+                } else {//caso para cuando insertamos un registro a un registro borrado
+                    Main.file.seek(posDisponible);
+                    //int posicionRegistro = (int) Main.file.length();
+                    while (x < fc) {
+                        if (fields.get(cont).equals("char")) {
+                            String tmp = model.getValueAt(0, x).toString();
+                            String reempl = "";
+                            char[] ch = new char[sizes.get(cont)];
+                            for (int w = 0; w < sizes.get(cont) - 1; w++) {
+                                if (w < tmp.length()) {
+                                    ch[w] = tmp.charAt(w);
+                                } else {
+                                    ch[w] = ' ';
+                                }
+                            }
+                            reempl = String.valueOf(ch);
+
+                            if (campoClave.equals(nombre_Campos.get(cont)) && fields.get(cont).equals(tipoCampo) && campoSize == sizes.get(cont) && isKey) {//Evaluar si el campo es llave si lo es ingresar al index file
+                                EstructuraIndex index = new EstructuraIndex(reempl, posDisponible);
+                                Main.indexFile = new RandomAccessFile(Main.fileName + "\\" + Main.name + reempl + "Index.txt", "rw");
+                                index.insertIndex();
+                            }
+
+                            Main.file.writeUTF(reempl);
+                        } else {
+                            if (campoClave.equals(nombre_Campos.get(cont)) && fields.get(cont).equals(tipoCampo) && campoSize == sizes.get(cont) && isKey) {//Evaluar si el campo es llave si lo es ingresar al index file
+                                Main.indexFile = new RandomAccessFile(Main.fileName + "\\" + Main.name + campoClave + "Index.txt", "rw");
+                                EstructuraIndex index = new EstructuraIndex(model.getValueAt(0, x).toString(), posDisponible);
+                                index.insertIndex();
+                            }
+                            Main.file.writeInt(Integer.parseInt(model.getValueAt(0, x).toString()));
+                        }
+                        cont++;
+                        x = x + 2;
+                    }
+
+                    JOptionPane.showMessageDialog(null, "¡Registro Ingresado correctamente!", "Archivos", JOptionPane.INFORMATION_MESSAGE);
+                    limpiarTabla(jTable1);
+                    model.addRow(new Object[]{null});
+                    this.jTable1.setModel(model);
+
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "¡Datos ingresados no cumplen con tamaño!", "Archivos", JOptionPane.ERROR_MESSAGE);
@@ -314,7 +369,8 @@ public class IntroducirRegistros extends javax.swing.JPanel {
         } catch (IOException ex) {
             Logger.getLogger(IntroducirRegistros.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(Main.cantRegis);
+
+
     }//GEN-LAST:event_ingresarButtonMouseClicked
 
     private void ingresarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarButtonActionPerformed

@@ -166,7 +166,7 @@ public class MenuArchivos extends javax.swing.JPanel {
                     Main.file.writeInt(c.getSize());
                     Main.file.writeChar(':');
                     if (c.getLlave()) {
-                        Main.indexFile = new RandomAccessFile(Main.fileName + "\\" + Main.name+c.getNombre() + "Index.txt", "rw");
+                        Main.indexFile = new RandomAccessFile(Main.fileName + "\\" + Main.name + c.getNombre() + "Index.txt", "rw");
                     }
                     Main.file.writeBoolean(c.getLlave());
                     Main.file.writeChar('|');
@@ -194,11 +194,9 @@ public class MenuArchivos extends javax.swing.JPanel {
         } else {
             Main.open = false;
             Main.campos.clear();
-            Main.key="";
-        
             try {
                 Main.file.close();
-        //        Main.indexFile.close(); //cuando cierro el archivo data tambien cierro el indexFile
+                Main.indexFile.close(); //cuando cierro el archivo data tambien cierro el indexFile
                 JOptionPane.showMessageDialog(null, "¡Archivo cerrado exitosamente!", "Archivos", JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException ex) {
                 Logger.getLogger(MenuArchivos.class.getName()).log(Level.SEVERE, null, ex);
@@ -212,10 +210,10 @@ public class MenuArchivos extends javax.swing.JPanel {
         if (Main.open) {
             JOptionPane.showMessageDialog(null, "¡Ya existe un archivo abierto!", "Archivos", JOptionPane.ERROR_MESSAGE);
         } else {
-            Main.fileName ="c:\\"+JOptionPane.showInputDialog("Ingrese ruta de archivo: ");
+            Main.fileName = "c:\\" + "\\Users\\Mauricio\\Documents";//+JOptionPane.showInputDialog("Ingrese ruta de archivo: ");
             Main.carpeta = new File(Main.fileName);
             if (Main.carpeta.isDirectory()) {
-                Main.name = JOptionPane.showInputDialog("Ingrese nombre del archivo: ");
+                Main.name = "Person";//JOptionPane.showInputDialog("Ingrese nombre del archivo: ");
                 File tmp = new File(Main.fileName + "\\" + Main.name + ".txt");
                 if (!tmp.exists()) {
                     Main.name = "";
@@ -249,6 +247,8 @@ public class MenuArchivos extends javax.swing.JPanel {
                                         }
                                     }
                                 } else {
+                                    int campos = 0;
+
                                     while (Main.file.getFilePointer() < Main.structure) {
                                         String n = Main.file.readUTF();
                                         Main.file.readChar();
@@ -262,7 +262,37 @@ public class MenuArchivos extends javax.swing.JPanel {
                                         if (k) {
                                             Main.key = n;
                                         }
+                                        campos++;
                                     }
+                                    int x = 0;
+                                    while (x < Main.cantRegis) {
+                                        int posicion = 0;
+                                        boolean esRegistro = true;
+                                        Object[] row = new Object[campos];
+                                        posicion = (int) Main.file.getFilePointer();
+                                        for (int i = 0; i < campos; i++) {
+                                            if (Main.campos.get(i).tipo.equals("char")) {
+                                                row[i] = Main.file.readUTF();
+                                                if (row[i].toString().charAt(0) == '-' && row[i].toString().charAt(1) == '1') {
+                                                    esRegistro = false;
+                                                }
+                                            } else {
+                                                row[i] = (Integer) Main.file.readInt();
+                                                if (row[i].toString().equals("-1")) {
+                                                    esRegistro = false;
+                                                }
+                                            }
+                                        }
+                                        if (!esRegistro) {
+                                            int posContinuacion = (int) Main.file.getFilePointer();
+
+                                            Main.lista.agregarNodo(posicion);
+                                            Main.file.seek(posContinuacion);
+
+                                        }
+                                        x++;
+                                    }
+
                                 }
                             }
                         } catch (IOException ex) {

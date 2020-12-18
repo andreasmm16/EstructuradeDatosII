@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
+import static java.util.stream.Collectors.joining;
 
 public class EstructuraIndex {
 
@@ -41,15 +42,22 @@ public class EstructuraIndex {
             es.puntero_registro = Main.indexFile.readInt();
             String puntero = Main.indexFile.readUTF();
             Object indice = es;
-            int value = es.valor.chars().reduce(0, Integer::sum);
+            String value = es.valor.codePoints().mapToObj((t) -> "" + t).collect(joining());
+
+            //int value = es.valor.chars().reduce(0, Integer::sum);
             Main.arbol.add(value, es);
         }
         Main.indexFile.seek(Main.indexFile.length());
     }
 
     public int getPunteroRegistro(String k) {//obtener el puntero del registro que se esta buscando
-        int value = k.chars().reduce(0, Integer::sum);
-        EstructuraIndex registro = Main.arbol.search(value);
+        // int value = k.chars().reduce(0, Integer::sum);
+        String value2 = k.codePoints().mapToObj((t) -> "" + t).collect(joining());
+        System.out.println(value2);
+        System.out.println(Main.arbol.toString());
+
+        // String value3 = "asssssooo".codePoints().mapToObj((t) -> "" + t).collect(joining());
+        EstructuraIndex registro = Main.arbol.search2(value2);
         if (registro != null) {
             return registro.puntero_registro;
         }
@@ -96,29 +104,34 @@ public class EstructuraIndex {
     }
 
     public boolean borrarRegistro(String k, String name) throws IOException {
-        int value = k.chars().reduce(0, Integer::sum);
-        EstructuraIndex registro = Main.arbol.search(value);
+        //int value = k.chars().reduce(0, Integer::sum);
+        String value2 = k.codePoints().mapToObj((t) -> "" + t).collect(joining());
+        EstructuraIndex registro = Main.arbol.search2(value2);
         if (registro != null) {
-            Main.arbol.delete(value);
+            Main.arbol.delete(value2);
             Main.indexFile = new RandomAccessFile(Main.fileName + "\\" + Main.name + name + "Index.txt", "rw");
             Main.indexFile.setLength(0);
-            System.out.println(Main.arbol.ReWriteIndexFile());
+            Main.arbol.ReWriteIndexFile();
             Main.file.seek(registro.puntero_registro);
+           // Main.lista.agregarNodo(puntero_registro);
             if (Main.campos.get(0).tipo.equals("char")) {
                 char[] registroBorrado = new char[Main.campos.get(0).size];
-                registroBorrado[0] = '*';
-                for (int i = 1; i < registroBorrado.length - 1; i++) {
+                registroBorrado[0] = '-';
+                registroBorrado[1] = '1';
+                for (int i = 2; i < registroBorrado.length - 1; i++) {
                     registroBorrado[i] = ' ';
                 }
                 Main.file.writeUTF(String.valueOf(registroBorrado));
             } else {
-                Main.file.writeInt(-999);
+                Main.file.writeInt(-1);
             }
+            Main.lista.agregarNodo(registro.puntero_registro);
             return true;
         }
         return false;
     }
 
+    //
     public void CrearIndex(String nombre) throws IOException {
         int position = 0;
         for (int i = 0; i < Main.campos.size(); i++) {
